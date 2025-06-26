@@ -1,6 +1,7 @@
 {
   "name": "coverage-report-for-linux",
   "displayName": "Coverage Report For Linux",
+  "publisher": "LucasDanielAguiar",
   "description": "",
   "version": "0.0.1",
   "engines": {
