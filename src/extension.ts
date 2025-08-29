@@ -17,8 +17,15 @@ export function activate(context: vscode.ExtensionContext) {
 		terminal.show();
 	});
 
+	const test = vscode.commands.registerCommand('coverage-report-for-linux.openwindowcoveragereport', () => {
+		vscode.window.createWebviewPanel("viewType", "title", {
+			preserveFocus: true,
+			viewColumn: 1
+		});
+	});
+
 	context.subscriptions.push(disposable);
 }
 
-export function deactivate() {}
+export function deactivate() { }
 // 5Qxn17OvUGPbPzJoHOnHe8IklGvvqDhDwQnTV4SGeFqDv18SGV4GJQQJ99BFACAAAAAAAAAAAAASAZDO26dS

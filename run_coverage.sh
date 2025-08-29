@@ -39,7 +39,7 @@ main() {
     -reports:"**/coverage.cobertura.xml" \
     -targetdir:"$REPORT_DIR" \
     -reporttypes:Html \
-    -filefilters:"-**/Program.cs"
+    -filefilters:"-**/Program.cs" > /dev/null
 
   echo "✅ Relatório gerado em ./$REPORT_DIR/index.html"
 
@@ -72,5 +72,5 @@ else
   echo "✅ Script concluído com sucesso."
 fi
 
-sleep 1s
+sleep 5s
 exit $EXIT_CODE
