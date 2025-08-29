@@ -1,7 +1,20 @@
 #!/bin/bash
 
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+
 # Executa tudo e captura o código de saída
 main() {
+  REPORT_DIR="coverage_report"
+  if [ -d "$REPORT_DIR" ]; then
+    echo "🧹 Removendo diretório antigo de relatório: $REPORT_DIR"
+    rm -rf "$REPORT_DIR"
+  fi
+
+  # Remove todas as pastas TestResults
+  echo "🧹 Removendo diretórios TestResults antigos..."
+  find . -type d -name "TestResults" -exec rm -rf {} +
+  
   echo "🔨 Realizando build do projeto..."
   dotnet build
 
@@ -20,12 +33,6 @@ main() {
 
   echo "🔧 Configurando PATH..."
   export PATH="$PATH:$HOME/.dotnet/tools"
-
-  REPORT_DIR="coverage_report"
-  if [ -d "$REPORT_DIR" ]; then
-    echo "🧹 Removendo diretório antigo de relatório: $REPORT_DIR"
-    rm -rf "$REPORT_DIR"
-  fi
 
   echo "📊 Gerando novo relatório de cobertura em HTML..."
   reportgenerator \
@@ -65,5 +72,5 @@ else
   echo "✅ Script concluído com sucesso."
 fi
 
-read -p "Pressione Enter para fechar..."
+sleep 1s
 exit $EXIT_CODE
