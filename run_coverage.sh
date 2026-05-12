@@ -20,8 +20,14 @@ main() {
   dotnet build
 
   echo "▶️ Executando testes com coleta de cobertura..."
-  dotnet test --collect:"Xplat Code Coverage" \
-    -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+  RUNSETTINGS_FILE="coverlet.runsettings"
+  if [ -f "$RUNSETTINGS_FILE" ]; then
+    echo "⚙️ Usando arquivo de configuração: $RUNSETTINGS_FILE"
+    dotnet test --settings "$RUNSETTINGS_FILE" --collect:"Xplat Code Coverage"
+  else
+    dotnet test --collect:"Xplat Code Coverage" \
+      -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+  fi
 
   echo "✅ Testes concluídos."
 
