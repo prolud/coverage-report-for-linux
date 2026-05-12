@@ -14,6 +14,7 @@ main() {
   # Remove todas as pastas TestResults
   echo "🧹 Removendo diretórios TestResults antigos..."
   find . -type d -name "TestResults" -exec rm -rf {} +
+  find . -type d \( -name "bin" -o -name "obj" \) -exec rm -rf {} +
   
   echo "🔨 Realizando build do projeto..."
   dotnet build
